@@ -29,10 +29,6 @@ print(grid)
 
 for x in range(len(grid)):
     for y in range(len(grid[x])):
-        out = "(" + str(x) + ", " + str(y) + ") - ["
-        adj = get_adjacent(grid, x, y)
-        for coord in adj:
-            out += "(" + str(coord[0]) + ", " + str(coord[1]) + ", " + grid[coord[0]][coord[1]] + "), "
-        print(out)
+        print(delinearize(grid, linearize(grid, x, y)))
 #test_df = generate_df(grid)
 #print(test_df)
