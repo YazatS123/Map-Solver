@@ -1,4 +1,5 @@
-df = []
+from funcs import *
+
 
 """
 WHAT TO DO (for personal reference)
@@ -21,5 +22,31 @@ hm still too tired to impl tho thats a problem for tomorrow
 oh also i still need to figure out how ts is gonna get displayed... maybe log what direction ur moving towards when doing log? also how about backtracking
 eh problems for tmr
 """
+log = []
+grid = []
+df = []
+def search(linear):
+    global log
+    log.append(delinearize(grid, linear))
+    delin = delinearize(grid, linear)
+    if grid[delin[0]][delin[1]] == '#': return linear
+    if len(df[linear]) == 0: return -1
+    for coord in df[linear]:
+        ans = search(linear)
+        if ans >= 0: return ans
+    return -1
 
-
+def dfs(gr):
+    global grid
+    grid = gr
+    global df
+    df = generate_df(grid)
+    start = -1
+    for x in range(len(grid)):
+        for y in range(len(grid[x])):
+            if grid[x][y] == '/': start = linearize(grid, x, y)
+    if start >= 0: search(start)
+    else: print("no starting pos found?????")
+    if len(log) == 0: print("Blank log??")
+    for step in log:
+        print(step)

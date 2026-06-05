@@ -1,12 +1,14 @@
 import pygame
 import random
 from pathlib import Path
+from dfs import *
+from funcs import *
 
 # Goal - take a random map from the map files and display
 
 # Navigate to maps folder
 cwd = Path.cwd()
-map_path = cwd / "Map Solver" / "maps"
+map_path = cwd / "maps"
 maps = sum(1 for item in map_path.iterdir()) # Count number of maps
 mapno = random.randint(1, maps)
 map_to_open = "map" + str(mapno) + ".txt"
@@ -26,8 +28,9 @@ with open(map_to_open_path, "r") as file:
             
             l = ""
     if len(l) > 0: grid.append(list(l))
-print(grid)
+#print(grid)
 
+dfs(grid)
 
 # Visualize grid
 pygame.init()
